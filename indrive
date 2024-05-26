@@ -1,0 +1,54 @@
+create database project;
+use project;
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    password VARCHAR(255),
+    created_at TIME (3),
+    updated_at TIME (5)
+);
+CREATE TABLE Driver (
+driver_id  INT Auto_increment primary key,
+first_name VARCHAR(50),
+last_name VARCHAR(50),
+email VARCHAR(50) Unique,
+phone VARCHAR(12),
+license_number VARCHAR(20) Unique,
+car_model VARCHAR(30),
+car_plate VARCHAR(10) Unique
+);
+create table rides (
+ride_id INT PRIMARY KEY AUTO_INCREMENT,
+user_id INT,
+driver_id INT,
+start_location VARCHAR(50),
+end_location VARCHAR(50),
+start_time TIME,
+end_time TIME,
+status VARCHAR(15), 
+fare DECIMAL,
+
+FOREIGN KEY(user_id) REFERENCES users(user_id),
+);
+create table payments(
+payment_id int  primary key Auto_Increment,
+ride_id  INT,
+Total DECIMAL,
+payment_method VARCHAR(20),
+payment_time TIME,
+FOREIGN KEY(ride_id) REFERENCES rides(ride_id),
+FOREIGN KEY (driver_id) REFERENCES Driver(driver_id)
+);
+CREATE TABLE Ratings (
+    rating_id INT primary key AUTO_INCREMENT ,
+    ride_id INT,
+    user_id INT,
+    driver_id INT,
+    rating decimal,
+    FOREIGN KEY (ride_id) REFERENCES Rides(ride_id),
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (driver_id) REFERENCES Drivers(driver_id)
+);
